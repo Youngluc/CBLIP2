@@ -1,0 +1,43 @@
+ # Copyright (c) 2022, salesforce.com, inc.
+ # All rights reserved.
+ # SPDX-License-Identifier: BSD-3-Clause
+ # For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause
+
+model:
+  arch: pretrain_gpt3.5b
+  load_finetuned: False
+
+  pretrained: ""
+  finetuned: ""
+
+  # vit encoder
+  vit_model: "chinese_clip_H"
+  image_size: 224
+  drop_path_rate: 0
+  use_grad_checkpoint: False
+  vit_precision: "fp16"
+  freeze_vit: True
+
+  # Q-Former
+  num_query_token: 32
+
+  # GPT
+  # gpt_model: "IDEA-CCNL/Wenzhong2.0-GPT2-3.5B-chinese"
+  gpt_model: "/home/chenghao03/pretrained_model/Wenzhong2.0-GPT2-3.5B-chinese"
+  # generation configs
+  prompt: ""
+
+
+preprocess:
+    vis_processor:
+        train:
+          name: "blip_image_train"
+          image_size: 224
+        eval:
+          name: "blip_image_eval"
+          image_size: 224
+    text_processor:
+        train:
+          name: "blip_caption"
+        eval:
+          name: "blip_caption"
